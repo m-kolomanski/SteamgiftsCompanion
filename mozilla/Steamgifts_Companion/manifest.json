@@ -1,0 +1,26 @@
+{
+    "manifest_version": 2,
+    "name": "Steamgifts Companion",
+    "version": "0.1",
+  
+    "description": "Automatically joins and hides giveaways on steamgifts.com",
+
+    "permissions": [
+        "storage"
+    ],
+
+    "content_scripts": [
+      {
+        "matches": ["*://*.steamgifts.com/*"],
+        "js": ["autojoiner.js", "autohider.js"],
+        "css": ["style.css"]
+      }
+    ],
+
+    "browser_specific_settings": {
+        "gecko": {
+            "id": "s5628283e6a07185c944fb8ec432896d72785d81e@example.org"
+        }
+    }
+  }
+  
