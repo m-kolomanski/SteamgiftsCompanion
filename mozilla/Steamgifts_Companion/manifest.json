@@ -21,6 +21,10 @@
         "gecko": {
             "id": "s5628283e6a07185c944fb8ec432896d72785d81e@example.org"
         }
+    },
+
+    "options_ui": {
+        "page": "options.html"
     }
   }
   
