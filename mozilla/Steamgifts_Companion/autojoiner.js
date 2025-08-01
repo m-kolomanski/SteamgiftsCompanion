@@ -1,10 +1,12 @@
 // SETUP //
-const sync_store = browser.storage.sync;
+sgLog("Autojoiner script loaded.");
+const store = browser.storage.local;
 
 // check if sync storage is setup correctly
-sync_store.get('whitelist').then((res) => {
+store.get('whitelist').then((res) => {
     if (Object.keys(res).length === 0) {
-        sync_store.set({ whitelist: LZString.compress(JSON.stringify([])) });
+        sgLog("Sync storage is empty, setting up default values.");
+        store.set({ whitelist: [] });
     }
 });
 
@@ -28,22 +30,19 @@ if (enter_button) {
  * @param {string} game_name - name of the game to be added to whitelist
  */
 addGameToWhitelist = async function(game_name) {
-    let whitelist = await sync_store.get('whitelist');
-    whitelist = JSON.parse(LZString.decompress(whitelist.whitelist));
+    let whitelist = await store.get('whitelist');
+    whitelist = whitelist.whitelist;
     
     if (!whitelist.includes(game_name)) {
         whitelist.push(game_name);
-        sync_store.set({ whitelist: LZString.compress(JSON.stringify(whitelist)) }).then(() => {
-            // TODO: show some notification
-            console.log("game added");
-        });
+        store.set({ whitelist: whitelist }).then(() => { sgLog("Game added: " + game_name); });
     }
 }
 
 // SCANNING FOR GAMES TO JOIN //
 // TODO: make sure we do not fetch data on every page
-sync_store.get('whitelist').then((res) => {
-    const current_whitelist = JSON.parse(LZString.decompress(res.whitelist));
+store.get('whitelist').then((res) => {
+    const current_whitelist = res.whitelist;
     const giveaways_on_page = document.querySelectorAll("a.giveaway__heading__name");
 
     let giveaways_to_join = [];
@@ -84,6 +83,8 @@ sync_store.get('whitelist').then((res) => {
         });
 
         sidebar.appendChild(notification);
+
+        sgLog(`Found ${n_giveaways} whitelisted giveaways to join.`);
     }
 });
 
@@ -107,6 +108,7 @@ const autojoinGiveaways = async function(links) {
 
     // added delay before loading page to account for server processing joins //
     setTimeout(() => {
+        sgLog("All giveaways joined, reloading page.");
         location.reload();
     }, 1000);
 }

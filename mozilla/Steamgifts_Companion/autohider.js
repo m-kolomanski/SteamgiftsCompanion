@@ -1,1 +1,1 @@
-console.log('hello from autohider');
+sgLog("Autohider script loaded.");

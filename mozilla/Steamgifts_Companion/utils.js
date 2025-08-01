@@ -1,0 +1,1 @@
+const sgLog = (msg) => console.log(`[Steamgifts Companion] ${msg}`);
