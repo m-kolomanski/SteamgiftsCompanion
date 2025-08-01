@@ -3,8 +3,8 @@ const sync_store = browser.storage.sync;
 
 // check if sync storage is setup correctly
 sync_store.get('whitelist').then((res) => {
-    if (!Array.isArray(res.whitelist)) {
-        sync_store.set({whitelist: [] });
+    if (Object.keys(res).length === 0) {
+        sync_store.set({ whitelist: LZString.compress(JSON.stringify([])) });
     }
 });
 
@@ -28,12 +28,12 @@ if (enter_button) {
  * @param {string} game_name - name of the game to be added to whitelist
  */
 addGameToWhitelist = async function(game_name) {
-    const whitelist = await sync_store.get('whitelist');
+    let whitelist = await sync_store.get('whitelist');
+    whitelist = JSON.parse(LZString.decompress(whitelist.whitelist));
     
-    if (!whitelist.whitelist.includes(game_name)) {
-        let new_whitelist = whitelist.whitelist;
-        new_whitelist.push(game_name);
-        sync_store.set({ whitelist: new_whitelist }).then(() => {
+    if (!whitelist.includes(game_name)) {
+        whitelist.push(game_name);
+        sync_store.set({ whitelist: LZString.compress(JSON.stringify(whitelist)) }).then(() => {
             // TODO: show some notification
             console.log("game added");
         });
@@ -43,7 +43,7 @@ addGameToWhitelist = async function(game_name) {
 // SCANNING FOR GAMES TO JOIN //
 // TODO: make sure we do not fetch data on every page
 sync_store.get('whitelist').then((res) => {
-    const current_whitelist = res.whitelist;
+    const current_whitelist = JSON.parse(LZString.decompress(res.whitelist));
     const giveaways_on_page = document.querySelectorAll("a.giveaway__heading__name");
 
     let giveaways_to_join = [];

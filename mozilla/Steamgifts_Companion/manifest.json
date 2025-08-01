@@ -12,7 +12,7 @@
     "content_scripts": [
       {
         "matches": ["*://*.steamgifts.com/*"],
-        "js": ["autojoiner.js", "autohider.js"],
+        "js": ["autojoiner.js", "autohider.js", "lib/lz-string.min.js"],
         "css": ["style.css"]
       }
     ],
