@@ -4,10 +4,26 @@
   <head>
     <meta charset="utf-8" />
     <meta name="color-scheme" content="dark light" />
+     <script src="utils.js"></script>
+     <style>
+        li {
+            cursor: pointer;
+            padding: .25em;
+            width: fit--content;
+        }
+        li:hover {
+            opacity: 0.75;
+            color: pink;
+            font-weight: bold;
+        }
+     </style>
   </head>
 
   <body>
-    <div>This is options</div>
-    <p id = "test"></p>
+    <h1>Steamgifts Companion - Options</h1>
+    <h3>List of whitelisted games:</h3>
+    <p>Click to remove from the list.</p>
+    <div id = "whitelisted-packages"></div>
     <script src="options.js"></script>
-  </body
+  </body>
+</html>

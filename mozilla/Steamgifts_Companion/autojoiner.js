@@ -1,14 +1,7 @@
 // SETUP //
 sgLog("Autojoiner script loaded.");
 const store = browser.storage.local;
-
-// check if sync storage is setup correctly
-store.get('whitelist').then((res) => {
-    if (Object.keys(res).length === 0) {
-        sgLog("Sync storage is empty, setting up default values.");
-        store.set({ whitelist: [] });
-    }
-});
+checkWhitelist(store);
 
 // ADDING GAMES TO WHITELIST //
 /**
