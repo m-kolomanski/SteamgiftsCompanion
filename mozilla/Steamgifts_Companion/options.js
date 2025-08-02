@@ -7,7 +7,7 @@ store.get('whitelist').then((res) => {
 
 const createGameList = (whitelist) => {
     const list_container = document.getElementById("whitelisted-packages");
-    list_container.innerHTML = "";
+    list_container.replaceChildren();
     const list_element = document.createElement("ul");
 
     whitelist

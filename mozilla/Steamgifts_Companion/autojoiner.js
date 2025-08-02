@@ -58,25 +58,36 @@ store.get('whitelist').then((res) => {
     if (n_giveaways > 0) {
         const sidebar = document.querySelector(".sidebar");
 
-        // consctruct notification //
+        // construct notification //
         const notification = document.createElement("div");
         notification.classList.add("autojoiner-container");
-        notification.innerHTML = `
-            <p>Detected ${n_giveaways} whitelisted giveaway${n_giveaways > 1 ? "s" : ""}.</p>
-            <button
-                id="autojoiner-button"
-                class="sidebar__entry-insert"
-            >Autojoin</button>
-        `;
+        
+        // Create paragraph element //
+        const paragraph = document.createElement("p");
+        paragraph.textContent = `Detected ${n_giveaways} whitelisted giveaway${n_giveaways > 1 ? "s" : ""}.`;
+        
+        // Create button element //
+        const button = document.createElement("button");
+        button.id = "autojoiner-button";
+        button.classList.add("sidebar__entry-insert");
+        button.textContent = "Autojoin";
 
         // trigger autojoining when user confirms //
-        notification.querySelector("#autojoiner-button").addEventListener('click', () => {
-            notification.innerHTML = `<p>Joining...</p>`;
+        button.addEventListener('click', () => {
+            // Clear notification and add "Joining..." message
+            notification.replaceChildren();
+            const joiningMessage = document.createElement("p");
+            joiningMessage.textContent = "Joining...";
+            notification.appendChild(joiningMessage);
+            
             autojoinGiveaways(giveaways_to_join);
         });
+        
+        // Append elements to notification //
+        notification.appendChild(paragraph);
+        notification.appendChild(button);
 
         sidebar.appendChild(notification);
-
         sgLog(`Found ${n_giveaways} whitelisted giveaways to join.`);
     }
 });
