@@ -3,8 +3,9 @@ A browser extension that enhances your Steamgifts.com experience by automaticall
 
 ## Features
 ### Adding Games to Whitelist
-1. Navigate to any giveaway page on Steamgifts.com
-2. Click the "Enter" button to join the giveaway - the game will be added to your whitelist.
+Games can be added to a whitelist via:
+1. Navigating to the giveaway page and clicking on **Join** button,
+2. or clicking on the quick join button on the main steamgifts page, next to the giveaway.
 
 ### Joining Whitelisted Giveaways
 1. Browse any Steamgifts page (home, search results, etc.)
