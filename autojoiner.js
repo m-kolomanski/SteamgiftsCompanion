@@ -18,6 +18,15 @@ if (enter_button) {
     });
 }
 
+const quick_join_buttons = document.querySelectorAll("[data-do='entry_insert']");
+quick_join_buttons.forEach((btn) => {
+    btn.addEventListener('click', (event) => {
+        const entered_giveaway = event.currentTarget.parentElement.parentElement.parentElement.querySelector("a.giveaway__heading__name");
+        const entered_name = entered_giveaway.href.split('/').at(-1);
+        addGameToWhitelist(entered_name);
+    })
+})
+
 /**
  * Checks if the game name is already in the whitelist. If not, adds it to the whitelist.
  * @param {string} game_name - name of the game to be added to whitelist
