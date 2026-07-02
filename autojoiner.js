@@ -45,12 +45,13 @@ store.get('whitelist').then((res) => {
 
         // check if game is on whitelist //
         if (current_whitelist.includes(game_name)) {
+            let giveaway_entry = giveaway.parentElement.parentElement.parentElement;
 
             // check if game is not already joined //
-            if (!giveaway.parentElement.parentElement.parentElement.classList.contains('is-faded')) {
+            if (!giveaway_entry.classList.contains('is-faded')) {
+                giveaway_entry.classList.add("sidebar__entry-insert")
                 giveaways_to_join.push(giveaway.href);
             }
-           
         }
     });
 
