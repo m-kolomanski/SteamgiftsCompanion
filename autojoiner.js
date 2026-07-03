@@ -58,7 +58,8 @@ store.get('whitelist').then((res) => {
 
             // check if game is not already joined //
             if (!giveaway_entry.classList.contains('is-faded')) {
-                giveaway_entry.classList.add("sidebar__entry-insert")
+                giveaway_entry.classList.add("sidebar__entry-insert");
+                giveaway_entry.classList.add("on-whitelist")
                 giveaways_to_join.push(giveaway.href);
             }
         }
