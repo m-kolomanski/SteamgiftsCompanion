@@ -5,6 +5,15 @@ store.get('whitelist').then((res) => {
     createGameList(res.whitelist);
 });
 
+const autoexpand_descriptions_check = document.querySelector('#autoexpand_descriptions');
+
+store.get('autoexpand_descriptions').then((res) => {
+    autoexpand_descriptions_check.checked = res.autoexpand_descriptions === true;
+});
+autoexpand_descriptions_check.addEventListener("click", (event) => {
+    store.set({ autoexpand_descriptions: autoexpand_descriptions_check.checked });
+})
+
 const createGameList = (whitelist) => {
     const list_container = document.getElementById("whitelisted-packages");
     list_container.replaceChildren();

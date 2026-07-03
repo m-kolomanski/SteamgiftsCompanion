@@ -3,6 +3,20 @@ sgLog("Autojoiner script loaded.");
 const store = browser.storage.local;
 checkWhitelist(store);
 
+// EXPAND DESCRIPTIONS REQUIRED FOR QUICK JOIN //
+store.get("autoexpand_descriptions").then((res) => {
+    if (res.autoexpand_descriptions) {
+        const description_buttons = document.querySelectorAll('.giveaway__quick-entry-btn.giveaway__quick-entry-btn--description');
+
+        description_buttons.forEach((btn) => {
+            const parent_row = btn.parentElement.parentElement;
+            if (!parent_row.classList.contains("is-faded")) {
+                btn.click()
+            }
+        });
+    }
+})
+
 // ADDING GAMES TO WHITELIST //
 /**
  * Adds an event listener to the "Enter" button for adding a game to the whitelist.
